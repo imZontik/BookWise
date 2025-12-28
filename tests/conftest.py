@@ -9,8 +9,6 @@ from starlette import status
 from src.main import create_app
 from src.core.database.database import Base, get_session
 
-import fakeredis.aioredis
-
 
 @pytest.fixture(scope="session")
 def database_url(tmp_path_factory):
@@ -24,14 +22,6 @@ async def engine(database_url):
     engine = create_async_engine(database_url, echo=False, future=True)
     yield engine
     await engine.dispose()
-
-
-@pytest.fixture
-async def test_redis():
-    redis = fakeredis.aioredis.FakeRedis(decode_responses=True)
-    await redis.flushdb()
-    yield redis
-    await redis.aclose()
 
 
 @pytest.fixture(scope="session", autouse=True)
