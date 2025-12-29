@@ -17,8 +17,8 @@ async def lifespan(app: FastAPI):
 
 def create_app():
     _app = FastAPI(
-        title="Hotel API",
-        description="API for hotels",
+        title="BookWise API",
+        description="API for BookWise",
         version="1.0",
         lifespan=lifespan
     )
